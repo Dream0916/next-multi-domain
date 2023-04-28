@@ -1,6 +1,7 @@
 import axios from "axios";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import Header from "@/components/Header";
 
 declare global {
   interface Window {
@@ -17,28 +18,11 @@ interface MockData {
 
 const Home = () => {
   const [currentDomain, setCurrentDomain] = useState<string>("");
-  const [mockData, setMockData] = useState<MockData>();
-
-  const getMockData = async () => {
-    try {
-      const { data } = await axios.post("/api/information", {
-        currentDomain,
-      });
-      setMockData(data.data);
-    } catch (error) {}
-  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const currentUrl = window.location.href;
       const currentDomain = new URL(currentUrl).hostname;
-      if (
-        currentDomain !== undefined &&
-        currentDomain !== "" &&
-        currentDomain !== null
-      ) {
-        getMockData();
-      }
       setCurrentDomain(currentDomain);
     }
   }, [currentDomain]);
@@ -51,70 +35,13 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col justify-between items-center p-24 min-h-screen">
+      <div className="bg-[#1a1a1a] border-b border-[#ffffff42]">
+        <Header />
+      </div>
+      <main className="flex flex-col justify-between items-center min-h-screen">
         <span className="p-2 text-3xl font-bold">
           Welcome to <span className="text-purple-600">{currentDomain}</span>
         </span>
-        <div className="description">
-          <p>
-            The Domain Name is&nbsp;
-            <code className="code">{currentDomain}</code>
-          </p>
-        </div>
-        <div className="center flex flex-wrap">
-          <div className="w-full lg:w-6/12 px-4">
-            <div className="relative w-full mb-3">
-              <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                Username
-              </label>
-              <input
-                type="text"
-                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value={mockData !== undefined ? mockData.name : ""}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="w-full lg:w-6/12 px-4">
-            <div className="relative w-full mb-3">
-              <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                Email
-              </label>
-              <input
-                type="text"
-                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value={mockData !== undefined ? mockData.email : ""}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="w-full lg:w-6/12 px-4">
-            <div className="relative w-full mb-3">
-              <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                Phone
-              </label>
-              <input
-                type="text"
-                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value={mockData !== undefined ? mockData.phone : ""}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="w-full lg:w-6/12 px-4">
-            <div className="relative w-full mb-3">
-              <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                Address
-              </label>
-              <input
-                type="text"
-                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value={mockData !== undefined ? mockData.address : ""}
-                readOnly
-              />
-            </div>
-          </div>
-        </div>
       </main>
     </>
   );

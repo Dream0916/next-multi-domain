@@ -97,6 +97,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  min-height: 100vh;
 }
 
 a {
@@ -143,4 +144,49 @@ a {
   padding: 4rem 0;
   max-width: var(--max-width);
   width: 100%;
+}
+
+.seatEmpty {
+  border: 1px solid #1ea83c;
+  width: 25px;
+  height: 25px;
+  border-radius: 2px;
+  color: #1ea83c;
+  text-align: center;
+  font-size: 10px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px;
+}
+
+.seatTaken {
+  width: 25px;
+  height: 25px;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 10px;
+  color: #fff;
+  background-color: #1ea83c !important;
+  border-color: #1ea83c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px;
+}
+
+.seatSelected {
+  width: 25px;
+  height: 25px;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 10px;
+  color: #fff;
+  background-color: #74f4f7 !important;
+  border-color: #74f4f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px;
 }
